@@ -1,28 +1,118 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div id="app" :class="$store.state.bgbody">
+    <div class="container is-flex">
+      <Header :projectName="projectName" />
+      <main class="main-wrapper">
+        <WeatherWrapper />
+      </main>
+      <Footer />
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import Header from "./components/layout/Header";
+import Footer from "./components/layout/Footer";
+import WeatherWrapper from "./components/weather/WeatherWrapper.vue";
 
 export default {
   name: "App",
+  data() {
+    return {
+      projectName: 'Weather App'
+    }
+  },
   components: {
-    HelloWorld
+    Header,
+    Footer,
+    WeatherWrapper
   }
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="sass">
+
+  $base-font: "Roboto", sans-serif
+  $base-heading: "Roboto Slab", serif
+
+  body 
+    font-family: $base-font
+    background: linear-gradient(#2f96a3,#303e8f)
+
+  h1, h2, h3, h4, h5, .heading
+    font-family: $base-heading
+  
+  .container.is-flex 
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    min-height: calc(100vh - 50px)
+  
+  .header-wrapper 
+    margin-bottom: 40px
+  
+  .main-wrapper 
+    flex-grow: 1
+    position: relative
+    padding-bottom: 4rem
+  
+  .footer-wrapper 
+    border-top: 1px solid rgba(0,0,0,.1)
+    padding: 20px 0
+    text-align: center
+
+  section, div, li, dl, dt, dd, th, td, address, blockquote
+    > *:last-child
+      margin-bottom: 0
+  
+  #app
+    padding: 50px 10px 0 10px
+    background: 
+      repeat: no-repeat
+      position: center
+      size: cover
+      image: url('./assets/default.jpg')
+    &.clouds
+      background-image: url('./assets/clouds.jpg')
+    &.rain
+      background-image: url('./assets/rain.jpg')
+    &.drizzle
+      background-image: url('./assets/drizzle.jpg')
+    &.thunderstorm
+      background-image: url('./assets/thunderstorm.jpg')
+    &.snow
+      background-image: url('./assets/snow.jpg')
+    &.clear
+      background-image: url('./assets/clear.jpg')
+  
+  .icon
+    display: inline-block
+    width: 7rem
+    height: 7rem
+    background: url('./assets/icon-clear.png') no-repeat center / cover
+    &.clouds
+      background-image: url('./assets/icon-clouds.png')
+    &.rain
+      background-image: url('./assets/icon-rain.png')
+    &.drizzle
+      background-image: url('./assets/icon-drizzle.png')
+    &.thunderstorm
+      background-image: url('./assets/icon-thunderstorm.png')
+    &.snow
+      background-image: url('./assets/icon-snow.png')
+    &.clear
+      background-image: url('./assets/icon-clear.png')
+
+  .animate-enter 
+    opacity: 0
+    transform: translateY(-20px)
+  
+  .animate-enter-active, .animate-leave-active 
+    transition: all .3s ease
+  
+  .animate-leave-to 
+    opacity: 0
+    transform: translateY(20px)
+  
+
 </style>
