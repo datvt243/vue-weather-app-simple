@@ -6,11 +6,9 @@
 
 <script>
 export default {
-  name: 'WeatherError',
-  props: ['message']
-}
+  name: "WeatherError",
+  props: ["message"]
+};
 </script>
 
-<style lang="sass">
-
-</style>
+<style lang="sass"></style>
